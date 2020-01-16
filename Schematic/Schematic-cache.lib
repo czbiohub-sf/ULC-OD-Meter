@@ -1,15 +1,44 @@
 EESchema-LIBRARY Version 2.4
 #encoding utf-8
 #
-# Connector_Generic:Conn_01x01
+# AmbientOptical_OPT101P
 #
-DEF Connector_Generic:Conn_01x01 J 0 40 Y N 1 F N
+DEF AmbientOptical_OPT101P U 0 20 Y Y 1 F N
+F0 "U" -150 250 60 H V C CNN
+F1 "AmbientOptical_OPT101P" 100 -300 60 H V L CNN
+F2 "digikey-footprints:DIP-8_W7.62mm" 200 200 60 H I L CNN
+F3 "http://www.ti.com/general/docs/suppproductinfo.tsp?distId=10&gotoUrl=http%3A%2F%2Fwww.ti.com%2Flit%2Fgpn%2Fopt101" 200 300 60 H I L CNN
+F4 "296-23090-5-ND" 200 400 60 H I L CNN "Digi-Key_PN"
+F5 "OPT101P" 200 500 60 H I L CNN "MPN"
+F6 "Sensors, Transducers" 200 600 60 H I L CNN "Category"
+F7 "Optical Sensors - Ambient Light, IR, UV Sensors" 200 700 60 H I L CNN "Family"
+F8 "http://www.ti.com/general/docs/suppproductinfo.tsp?distId=10&gotoUrl=http%3A%2F%2Fwww.ti.com%2Flit%2Fgpn%2Fopt101" 200 800 60 H I L CNN "DK_Datasheet_Link"
+F9 "/product-detail/en/texas-instruments/OPT101P/296-23090-5-ND/251177" 200 900 60 H I L CNN "DK_Detail_Page"
+F10 "SENSOR OPT 650NM AMBIENT 8DIP" 200 1000 60 H I L CNN "Description"
+F11 "Texas Instruments" 200 1100 60 H I L CNN "Manufacturer"
+F12 "Active" 200 1200 60 H I L CNN "Status"
+DRAW
+S -200 200 200 -200 0 1 0 f
+X VS 1 0 300 100 D 50 50 1 1 W
+X -IN 2 -300 100 100 R 50 50 1 1 I
+X V- 3 0 -300 100 U 50 50 1 1 W
+X FB 4 -300 0 100 R 50 50 1 1 I
+X OUT 5 300 0 100 L 50 50 1 1 O
+X NC 6 200 -100 100 L 50 50 1 1 N N
+X NC 7 200 -200 100 L 50 50 1 1 N N
+X COM 8 -300 -100 100 R 50 50 1 1 I
+ENDDRAW
+ENDDEF
+#
+# Connector_Generic_Conn_01x01
+#
+DEF Connector_Generic_Conn_01x01 J 0 40 Y N 1 F N
 F0 "J" 0 100 50 H V C CNN
-F1 "Connector_Generic:Conn_01x01" 0 -100 50 H V C CNN
+F1 "Connector_Generic_Conn_01x01" 0 -100 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
- Connector*:*
+ Connector*:*_1x??_*
 $ENDFPLIST
 DRAW
 S -50 5 0 -5 1 1 6 N
@@ -18,11 +47,11 @@ X Pin_1 1 -200 0 150 R 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# Connector_Generic:Conn_01x17
+# Connector_Generic_Conn_01x17
 #
-DEF Connector_Generic:Conn_01x17 J 0 40 Y N 1 F N
+DEF Connector_Generic_Conn_01x17 J 0 40 Y N 1 F N
 F0 "J" 0 900 50 H V C CNN
-F1 "Connector_Generic:Conn_01x17" 0 -900 50 H V C CNN
+F1 "Connector_Generic_Conn_01x17" 0 -900 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -67,11 +96,119 @@ X Pin_9 9 -200 0 150 R 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# power:+3V3
+# Device_LED
 #
-DEF power:+3V3 #PWR 0 0 Y Y 1 F P
+DEF Device_LED D 0 40 N N 1 F N
+F0 "D" 0 100 50 H V C CNN
+F1 "Device_LED" 0 -100 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ LED*
+ LED_SMD:*
+ LED_THT:*
+$ENDFPLIST
+DRAW
+P 2 0 1 8 -50 -50 -50 50 N
+P 2 0 1 0 -50 0 50 0 N
+P 4 0 1 8 50 -50 50 50 -50 0 50 -50 N
+P 5 0 1 0 -120 -30 -180 -90 -150 -90 -180 -90 -180 -60 N
+P 5 0 1 0 -70 -30 -130 -90 -100 -90 -130 -90 -130 -60 N
+X K 1 -150 0 100 R 50 50 1 1 P
+X A 2 150 0 100 L 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Device_R
+#
+DEF Device_R R 0 0 N Y 1 F N
+F0 "R" 80 0 50 V V C CNN
+F1 "Device_R" 0 0 50 V V C CNN
+F2 "" -70 0 50 V I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ R_*
+$ENDFPLIST
+DRAW
+S -40 -100 40 100 0 1 10 N
+X ~ 1 0 150 50 D 50 50 1 1 P
+X ~ 2 0 -150 50 U 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Device_R_POT
+#
+DEF Device_R_POT RV 0 40 Y N 1 F N
+F0 "RV" -175 0 50 V V C CNN
+F1 "Device_R_POT" -100 0 50 V V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ Potentiometer*
+$ENDFPLIST
+DRAW
+S 40 100 -40 -100 0 1 10 N
+P 2 0 1 0 100 0 60 0 N
+P 4 0 1 0 45 0 90 20 90 -20 45 0 F
+X 1 1 0 150 50 D 50 50 1 1 P
+X 2 2 150 0 50 L 50 50 1 1 P
+X 3 3 0 -150 50 U 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Display_Character_NHD-0420H1Z
+#
+DEF Display_Character_NHD-0420H1Z U 0 20 Y Y 1 F N
+F0 "U" -250 750 50 H V C CNN
+F1 "Display_Character_NHD-0420H1Z" 200 750 50 H V L CNN
+F2 "Display:NHD-0420H1Z" 0 -900 50 H I C CNN
+F3 "" 100 -100 50 H I C CNN
+$FPLIST
+ NHD*0420H1Z*
+$ENDFPLIST
+DRAW
+S -300 700 300 -700 0 1 10 f
+X VSS 1 0 -800 100 U 50 50 1 1 W
+X DB3 10 -400 -200 100 R 50 50 1 1 B
+X DB4 11 -400 -300 100 R 50 50 1 1 B
+X DB5 12 -400 -400 100 R 50 50 1 1 B
+X DB6 13 -400 -500 100 R 50 50 1 1 B
+X DB7 14 -400 -600 100 R 50 50 1 1 B
+X A 15 400 -300 100 L 50 50 1 1 P
+X K 16 400 -200 100 L 50 50 1 1 P
+X VDD 2 0 800 100 D 50 50 1 1 W
+X VO 3 100 800 100 D 50 50 1 1 W
+X RS 4 -400 600 100 R 50 50 1 1 I
+X R/W 5 -400 500 100 R 50 50 1 1 I
+X E 6 -400 400 100 R 50 50 1 1 I
+X DB0 7 -400 100 100 R 50 50 1 1 B
+X DB1 8 -400 0 100 R 50 50 1 1 B
+X DB2 9 -400 -100 100 R 50 50 1 1 B
+ENDDRAW
+ENDDEF
+#
+# Switch_SW_Push
+#
+DEF Switch_SW_Push SW 0 40 N N 1 F N
+F0 "SW" 50 100 50 H V L CNN
+F1 "Switch_SW_Push" 0 -60 50 H V C CNN
+F2 "" 0 200 50 H I C CNN
+F3 "" 0 200 50 H I C CNN
+DRAW
+C -80 0 20 0 1 0 N
+C 80 0 20 0 1 0 N
+P 2 0 1 0 0 50 0 120 N
+P 2 0 1 0 100 50 -100 50 N
+X 1 1 -200 0 100 R 50 50 0 1 P
+X 2 2 200 0 100 L 50 50 0 1 P
+ENDDRAW
+ENDDEF
+#
+# power_+3V3
+#
+DEF power_+3V3 #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -150 50 H I C CNN
-F1 "power:+3V3" 0 140 50 H V C CNN
+F1 "power_+3V3" 0 140 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 ALIAS +3.3V
@@ -83,11 +220,11 @@ X +3V3 1 0 0 0 U 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
-# power:+5V
+# power_+5V
 #
-DEF power:+5V #PWR 0 0 Y Y 1 F P
+DEF power_+5V #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -150 50 H I C CNN
-F1 "power:+5V" 0 140 50 H V C CNN
+F1 "power_+5V" 0 140 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -98,11 +235,11 @@ X +5V 1 0 0 0 U 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
-# power:GND
+# power_GND
 #
-DEF power:GND #PWR 0 0 Y Y 1 F P
+DEF power_GND #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -250 50 H I C CNN
-F1 "power:GND" 0 -150 50 H V C CNN
+F1 "power_GND" 0 -150 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
