@@ -1,6 +1,0 @@
-(sym_lib_table
-  (lib (name AmbientOptical)(type Legacy)(uri /Users/robert.puccinelli/github/digikey-kicad-library/digikey-symbols/dk_Optical-Sensors-Ambient-Light-IR-UV-Sensors.lib)(options "")(descr ""))
-  (lib (name Photodiodes)(type Legacy)(uri /Users/robert.puccinelli/github/digikey-kicad-library/digikey-symbols/dk_Optical-Sensors-Photodiodes.lib)(options "")(descr ""))
-  (lib (name Phototransistors)(type Legacy)(uri /Users/robert.puccinelli/github/digikey-kicad-library/digikey-symbols/dk_Optical-Sensors-Phototransistors.lib)(options "")(descr ""))
-  (lib (name ReflectiveAnalogOutput)(type Legacy)(uri /Users/robert.puccinelli/github/digikey-kicad-library/digikey-symbols/dk_Optical-Sensors-Reflective-Analog-Output.lib)(options "")(descr ""))
-)

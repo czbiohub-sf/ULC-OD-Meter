@@ -1,0 +1,33 @@
+EESchema-LIBRARY Version 2.4
+#encoding utf-8
+#
+# OPT101P-AmbientOptical-ODMeter-rescue-ODMeter-rescue
+#
+DEF OPT101P-AmbientOptical-ODMeter-rescue-ODMeter-rescue U 0 20 Y Y 1 F N
+F0 "U" -150 250 60 H V C CNN
+F1 "OPT101P-AmbientOptical-ODMeter-rescue-ODMeter-rescue" 100 -300 60 H V L CNN
+F2 "digikey-footprints:DIP-8_W7.62mm" 200 200 60 H I L CNN
+F3 "http://www.ti.com/general/docs/suppproductinfo.tsp?distId=10&gotoUrl=http%3A%2F%2Fwww.ti.com%2Flit%2Fgpn%2Fopt101" 200 300 60 H I L CNN
+F4 "296-23090-5-ND" 200 400 60 H I L CNN "Digi-Key_PN"
+F5 "OPT101P" 200 500 60 H I L CNN "MPN"
+F6 "Sensors, Transducers" 200 600 60 H I L CNN "Category"
+F7 "Optical Sensors - Ambient Light, IR, UV Sensors" 200 700 60 H I L CNN "Family"
+F8 "http://www.ti.com/general/docs/suppproductinfo.tsp?distId=10&gotoUrl=http%3A%2F%2Fwww.ti.com%2Flit%2Fgpn%2Fopt101" 200 800 60 H I L CNN "DK_Datasheet_Link"
+F9 "/product-detail/en/texas-instruments/OPT101P/296-23090-5-ND/251177" 200 900 60 H I L CNN "DK_Detail_Page"
+F10 "SENSOR OPT 650NM AMBIENT 8DIP" 200 1000 60 H I L CNN "Description"
+F11 "Texas Instruments" 200 1100 60 H I L CNN "Manufacturer"
+F12 "Active" 200 1200 60 H I L CNN "Status"
+DRAW
+S -200 200 200 -200 0 1 0 f
+X VS 1 0 300 100 D 50 50 1 1 W
+X -IN 2 -300 100 100 R 50 50 1 1 I
+X V- 3 0 -300 100 U 50 50 1 1 W
+X FB 4 -300 0 100 R 50 50 1 1 I
+X OUT 5 300 0 100 L 50 50 1 1 O
+X NC 6 200 -100 100 L 50 50 1 1 N N
+X NC 7 200 -200 100 L 50 50 1 1 N N
+X COM 8 -300 -100 100 R 50 50 1 1 I
+ENDDRAW
+ENDDEF
+#
+#End Library

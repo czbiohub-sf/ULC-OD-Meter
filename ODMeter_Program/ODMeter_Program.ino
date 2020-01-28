@@ -3,7 +3,7 @@
 
 //Arduino pins
 const int output_photodiode = A0;
-const int button_input = 4
+const int button_input = 3;
 const int lcd_contrast = 5;
 const int rs = 6, rw = 7, en = 8, d4 = 9, d5 = 10, d6 = 11, d7 = 12;
 
@@ -12,6 +12,8 @@ int new_read = 0;
 int sum_of_reads = 0;
 int sample_counts = 0;
 int thresh_counts = 20;
+int value = 0;
+bool lcd_changed = false;
 volatile int ref_counts = 0;
 volatile bool ref_captured = false;
 
@@ -26,11 +28,10 @@ void setup() {
   analogRead(output_photodiode);
   analogWrite(lcd_contrast, 40);
   pinMode(button_input, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(button_input), referenceISR, RISING);
 
   //Set welcome screen
   lcd.begin(16, 2);
-  lcd.print("CZ Biohub");
+  lcd.print("  CZ Biohub");
   lcd.setCursor(0,1);
   lcd.print("Turbidity Meter");
   delay(2000);
@@ -50,6 +51,9 @@ void setup() {
   //Reset display
   lcd.clear();
   lcd.print("Raw intensity:");
+
+  attachInterrupt(digitalPinToInterrupt(button_input), referenceISR, LOW);
+
 }
 
 void loop() {
@@ -58,16 +62,24 @@ void loop() {
   sum_of_reads = sum_of_reads + new_read;
   sample_counts = sample_counts + 1;
 
+  if (ref_captured == true && lcd_changed == false)
+  {
+    lcd_changed = true;
+    lcd.clear();
+    lcd.print("Measured OD:");
+  }
+
   //Print to display when threhs_counts reached and reset vars
   if (sample_counts == thresh_counts && ref_captured == false)
   {
-    printNumber(sum_of_reads / thresh_counts);
+    value = sum_of_reads / thresh_counts;
+    printNumber(value);
     sample_counts = 0;
     sum_of_reads = 0;
   }
   else if (sample_counts == thresh_counts && ref_captured == true)
   {
-    printNumber(log10( ref_captured / (sum_of_reads/thresh_counts) ));
+    printNumber(log10( float(value) / float(sum_of_reads/thresh_counts) ));
     sample_counts = 0;
     sum_of_reads = 0;
   }
@@ -76,15 +88,16 @@ void loop() {
 }
 
 //Print number to LCD
-void printNumber(int number){
+void printNumber(float number){
   lcd.setCursor(6, 1);
   lcd.print("    ");
   lcd.setCursor(6, 1);
   lcd.print(number);
+  Serial.println(number);
 }
 
 //Button callback
 void referenceISR(void){
-  ref_counts = analogRead(output_photodiode);
+  ref_counts = value;
   ref_captured = true;
 }
