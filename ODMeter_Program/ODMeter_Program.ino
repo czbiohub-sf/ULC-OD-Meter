@@ -13,7 +13,10 @@ int sum_of_reads = 0;
 int sample_counts = 0;
 int thresh_counts = 20;
 int value = 0;
-bool lcd_changed = false;
+bool lcd_changed_dark = false;
+bool lcd_changed_ref = false;
+volatile int dark_counts = 0;
+volatile bool dark_captured = false;
 volatile int ref_counts = 0;
 volatile bool ref_captured = false;
 
@@ -37,7 +40,7 @@ void setup() {
   delay(2000);
 
   lcd.clear();
-  lcd.print("Insert blank and");
+  lcd.print("Insert dark ref");
   lcd.setCursor(0, 1);
   lcd.print("press REF button");
   delay(2000);
@@ -52,7 +55,7 @@ void setup() {
   lcd.clear();
   lcd.print("Raw intensity:");
 
-  attachInterrupt(digitalPinToInterrupt(button_input), referenceISR, LOW);
+  attachInterrupt(digitalPinToInterrupt(button_input), darkISR, LOW);
 
 }
 
@@ -62,9 +65,31 @@ void loop() {
   sum_of_reads = sum_of_reads + new_read;
   sample_counts = sample_counts + 1;
 
-  if (ref_captured == true && lcd_changed == false)
+  if (dark_captured == true && lcd_changed_dark == false)
   {
-    lcd_changed = true;
+    detachInterrupt(digitalPinToInterrupt(button_input));
+    lcd.clear();
+    lcd.print("Insert media ref");
+    lcd.setCursor(0, 1);
+    lcd.print("press REF button");
+    delay(2000);
+
+    lcd.clear();
+    lcd.print("press REF button");
+    lcd.setCursor(0,1);
+    lcd.print("when ready.");
+    delay(1500);
+
+    lcd.clear();
+    lcd.print("Raw intensity:");
+  
+    lcd_changed_dark=true;
+    attachInterrupt(digitalPinToInterrupt(button_input), referenceISR, LOW);
+  }
+
+  if (ref_captured == true && lcd_changed_ref == false)
+  {
+    lcd_changed_ref = true;
     lcd.clear();
     lcd.print("Measured OD:");
   }
@@ -72,14 +97,14 @@ void loop() {
   //Print to display when threhs_counts reached and reset vars
   if (sample_counts == thresh_counts && ref_captured == false)
   {
-    value = sum_of_reads / thresh_counts;
+    value = (sum_of_reads / thresh_counts) - dark_counts;
     printNumber(value);
     sample_counts = 0;
     sum_of_reads = 0;
   }
   else if (sample_counts == thresh_counts && ref_captured == true)
   {
-    printNumber(log10( float(value) / float(sum_of_reads/thresh_counts) ));
+    printNumber(log10( float(value) / float((sum_of_reads/thresh_counts) - dark_counts) ));
     sample_counts = 0;
     sum_of_reads = 0;
   }
@@ -96,7 +121,12 @@ void printNumber(float number){
   Serial.println(number);
 }
 
-//Button callback
+//Button callbacks
+void darkISR(void){
+  dark_counts = value;
+  dark_captured = true;
+}
+
 void referenceISR(void){
   ref_counts = value;
   ref_captured = true;
