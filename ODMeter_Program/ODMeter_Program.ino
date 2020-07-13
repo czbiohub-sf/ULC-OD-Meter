@@ -13,12 +13,16 @@ int sum_of_reads = 0;
 int sample_counts = 0;
 int thresh_counts = 20;
 int value = 0;
-bool lcd_changed_dark = false;
+volatile bool lcd_changed_dark = false;
 bool lcd_changed_ref = false;
 volatile int dark_counts = 0;
 volatile bool dark_captured = false;
 volatile int ref_counts = 0;
 volatile bool ref_captured = false;
+volatile unsigned long t_last = 0;
+int t_debounce_ms = 100;
+int t_expire_ms = 1000;
+volatile bool reset_to_raw = false;
 
 //Initialize LCD and function prototype
 LiquidCrystal lcd(rs, rw, en, d4, d5, d6, d7);
@@ -128,6 +132,18 @@ void darkISR(void){
 }
 
 void referenceISR(void){
-  ref_counts = value;
-  ref_captured = true;
+  unsigned long t_now = millis();
+  if (!reset_to_raw){
+    ref_counts = value;
+    ref_captured = true;
+    t_last = t_now;
+    reset_to_raw = true;
+  }
+  else{
+    if ((t_now - t_last) > t_debounce_ms && (t_now - t_last) < t_expire_ms){
+      ref_captured = false;
+      lcd_changed_dark = false;
+      reset_to_raw = false;
+    }
+  }
 }
