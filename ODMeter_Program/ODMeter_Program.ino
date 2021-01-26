@@ -124,7 +124,8 @@ void loop() {
       }
       if (sample_counts == thresh_counts) {
       value = (sum_of_reads / thresh_counts);
-      printNumber(log10(float(value-dark_counts) / float(ref_counts-dark_counts)));
+      lcd.print(value);
+      printNumber(log10(float(value-dark_counts) / float(ref_counts-dark_counts))); // OD Meter readign
       sample_counts = 0;
       sum_of_reads = 0;
       }
@@ -182,7 +183,7 @@ void captureMediaISR(void){
     detachInterrupt(digitalPinToInterrupt(button_input));
     ref_counts = value;
     lcd.clear();
-    lcd.print("Measured OD:");
+//    lcd.print("Measured OD:");
 //    attachInterrupt(digitalPinToInterrupt(button_input), multiISR, LOW);
     state = 3;
   }
