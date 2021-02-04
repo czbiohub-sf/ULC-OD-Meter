@@ -21,15 +21,18 @@ volatile int dark_counts = 0;
 volatile int ref_counts = 0;
 volatile bool ref_captured = false;
 int t_debounce_ms = 100;
-int t_expire_ms = 1000;
 volatile bool reset_to_raw = false;
 volatile int state = 0;
+
+int b;
 
 //Initialize LCD and function prototype
 LiquidCrystal lcd(rs, rw, en, d4, d5, d6, d7);
 
 void setup() {
   //Pin setup
+  Serial.begin(9600);
+  Serial.println("Starting");
   analogReference(EXTERNAL);
   analogRead(output_photodiode);
   analogWrite(lcd_contrast, 40);
@@ -55,11 +58,11 @@ void loop() {
   new_read = analogRead(output_photodiode);
   sum_of_reads = sum_of_reads + new_read;
   sample_counts = sample_counts + 1;
-//  Serial.println(String(state));
-  
+  Serial.print("State: ");
+  Serial.println(state);
   switch (state) {
     case 0: // raw reading
-       // average the readings once the sample count threshhold is met
+       // average the readings once the sample count threshold is met
       if (sample_counts == thresh_counts) {
         value = (sum_of_reads / thresh_counts);
         printNumber(value);
@@ -106,31 +109,31 @@ void loop() {
     
       lcd.clear();
       lcd.print("Media intensity:");
-
       attachInterrupt(digitalPinToInterrupt(button_input), captureMediaISR, LOW);
-      
       state = 0;
       break;
           
     
     case 3: // OD reading
-      int b = checkButton();
-      if (b == 1) state=2;
-      if (b == 2){
-        attachInterrupt(digitalPinToInterrupt(button_input), askMediaISR, LOW);
-        lcd.clear();
-        lcd.print("Raw intensity:");
-        state=0;
+      b = checkButton();
+      if (b == 2) {
+        attachInterrupt(digitalPinToInterrupt(button_input), askDarkISR, LOW);
+        state=1;
+        
       }
       if (sample_counts == thresh_counts) {
       value = (sum_of_reads / thresh_counts);
+      Serial.print("Reading OD Value of: ");
+      Serial.println(value);
+      lcd.clear();
       lcd.print(value);
-      printNumber(log10(float(value-dark_counts) / float(ref_counts-dark_counts))); // OD Meter readign
+      printNumber(-1.0 * log10(float(value-dark_counts) / float(ref_counts-dark_counts))); // OD Meter readign
       sample_counts = 0;
       sum_of_reads = 0;
       }
       
       break;
+     
   }
   delay(10);
 }
@@ -140,8 +143,8 @@ void printNumber(float number){
   lcd.setCursor(6, 1);
   lcd.print("    ");
   lcd.setCursor(6, 1);
-  lcd.print(number);
-//  Serial.println(number);
+  lcd.print(number,3);
+  Serial.println(number);
 }
 
 //Button callbacks
@@ -161,6 +164,7 @@ void captureDarkISR(void){
     Serial.println("captureDarkISR TRIGGERED");
     detachInterrupt(digitalPinToInterrupt(button_input));
     dark_counts = value;
+    Serial.println("Setting state to 2");
     state = 2;
   }
   t_last = t_now;
@@ -179,7 +183,7 @@ void askMediaISR(void){
 void captureMediaISR(void){
   t_now = millis();
   if ((t_now - t_last) > t_debounce_ms){
-    Serial.println("captureMediakISR TRIGGERED");
+    Serial.println("captureMediaISR TRIGGERED");
     detachInterrupt(digitalPinToInterrupt(button_input));
     ref_counts = value;
     lcd.clear();
@@ -189,7 +193,6 @@ void captureMediaISR(void){
   }
   t_last = t_now;
 }
-
 //=================================================
 //  MULTI-CLICK:  One Button, Multiple Events
 
@@ -197,6 +200,7 @@ void captureMediaISR(void){
 int debounce = 100;          // ms debounce period to prevent flickering when pressing or releasing the button
 int DCgap = 280;            // max ms between clicks for a double click event
 int holdTime = 1000;        // ms hold period: how long to wait for press+hold event
+int longHoldTime = 3000;
 
 // Button variables
 boolean buttonVal = HIGH;   // value read from button
@@ -209,6 +213,7 @@ long upTime = -1;           // time the button was released
 boolean ignoreUp = false;   // whether to ignore the button release because the click+hold was triggered
 boolean waitForUp = false;        // when held, whether to wait for the up event
 boolean holdEventPast = false;    // whether or not the hold event happened already
+boolean longHoldEventPast = false; //whether or not the long hold event happened already
 
 int checkButton() {   
    int event = 0;
