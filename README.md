@@ -4,7 +4,7 @@
 
 
 ## Getting Started
-The latest Arduino IDE can be downloaded [on Arduino's website.](https://www.arduino.cc/en/software). Open `ODMeter_Program.ino` in the IDE. To upload code, select 'Board' as Arduino Nano or Arduino Micro. Select the port associated with the Arduino on the OD Meter to upload. 
+The latest Arduino IDE can be downloaded [on Arduino's website](https://www.arduino.cc/en/software). Open `ODMeter_Program.ino` in the IDE. To upload code, select 'Board' as Arduino Nano or Arduino Micro. Select the port associated with the Arduino on the OD Meter to upload. 
 
 *Important:* Please give the Arduino about 30 minutes to warm up before starting any measurements.
 
@@ -13,9 +13,6 @@ The OD Meter has three different states, as seen below:
 
 
 ![OD State Machine](OD_StateMachine.png)
-
-
-Regular line = Single click, dotted line = long press to move between states.
 
 
 **Dark Ref Mode**
