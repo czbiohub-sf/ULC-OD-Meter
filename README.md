@@ -10,12 +10,10 @@ The latest Arduino IDE can be downloaded [on Arduino's website.](https://www.ard
 
 ## Operating the OD Meter
 The OD Meter has three different states, as seen below:
-```mermaid
-graph LR
-A(Dark Ref Mode) --> B(Blank Ref Mode)
-B(Blank Ref Mode) --> C(OD Readout Mode)
-C(OD Readout Mode) -.-> A(Dark Ref Mode)
-```
+
+
+![OD State Machine](OD_StateMachine.png)
+
 
 Regular line = Single click, dotted line = long press to move between states.
 
