@@ -23,6 +23,7 @@ volatile bool ref_captured = false;
 int t_debounce_ms = 100;
 volatile bool reset_to_raw = false;
 volatile int state = 0;
+volatile int stored_next_state = 0;
 
 int b;
 
@@ -58,7 +59,6 @@ void loop() {
   new_read = analogRead(output_photodiode);
   sum_of_reads = sum_of_reads + new_read;
   sample_counts = sample_counts + 1;
-  Serial.print("State: ");
   Serial.println(state);
   switch (state) {
     case 0: // raw reading
@@ -88,7 +88,16 @@ void loop() {
       lcd.clear();
       lcd.print("Dark intensity:");
 
-      attachInterrupt(digitalPinToInterrupt(button_input), captureDarkISR, LOW);
+      if (digitalRead(button_input) == LOW) {
+        // Check if the button is being pressed at the moment --
+        // if it is, then attach a temporary interrupt that waits for the button
+        // to change state to high. When it does, it attaches the correct ISR,
+        // based on the stored_next_state variable.
+        attachInterrupt(digitalPinToInterrupt(button_input), tempISR, HIGH);
+        stored_next_state = 1;
+      } else {
+        attachInterrupt(digitalPinToInterrupt(button_input), captureDarkISR, LOW);
+      }
         
       state = 0;
       break;
@@ -109,7 +118,17 @@ void loop() {
     
       lcd.clear();
       lcd.print("Media intensity:");
-      attachInterrupt(digitalPinToInterrupt(button_input), captureMediaISR, LOW);
+      
+      if (digitalRead(button_input) == LOW) {
+         // Check if the button is being pressed at the moment --
+        // if it is, then attach a temporary interrupt that waits for the button
+        // to change state to high. When it does, it attaches the correct ISR,
+        // based on the stored_next_state variable.
+        attachInterrupt(digitalPinToInterrupt(button_input), tempISR, HIGH);
+        stored_next_state = 2;
+      } else {
+        attachInterrupt(digitalPinToInterrupt(button_input), captureMediaISR, LOW);
+      }
       state = 0;
       break;
           
@@ -123,11 +142,9 @@ void loop() {
       }
       if (sample_counts == thresh_counts) {
       value = (sum_of_reads / thresh_counts);
-      Serial.print("Reading OD Value of: ");
-      Serial.println(value);
-      lcd.clear();
-      lcd.print(value);
-      printNumber(-1.0 * log10(float(value-dark_counts) / float(ref_counts-dark_counts))); // OD Meter readign
+//      lcd.clear();
+//      lcd.print(value);
+      printNumber(-1.0 * log10(float(value-dark_counts) / float(ref_counts-dark_counts))); // OD Meter reading
       sample_counts = 0;
       sum_of_reads = 0;
       }
@@ -144,14 +161,28 @@ void printNumber(float number){
   lcd.print("    ");
   lcd.setCursor(6, 1);
   lcd.print(number,3);
-  Serial.println(number);
 }
 
 //Button callbacks
+void tempISR(void) {
+  t_now = millis();
+  if ((t_now - t_last) > t_debounce_ms) {
+//    Serial.println("tempISR TRIGGERED");
+    detachInterrupt(digitalPinToInterrupt(button_input));
+    if (stored_next_state == 1) {
+      attachInterrupt(digitalPinToInterrupt(button_input), captureDarkISR, LOW);
+    } else {
+      // it equals 2
+      attachInterrupt(digitalPinToInterrupt(button_input), captureMediaISR, LOW);
+    }
+  }
+}
+
+
 void askDarkISR(void){
   t_now = millis();
   if ((t_now - t_last) > t_debounce_ms){
-    Serial.println("askDarkISR TRIGGERED");
+//    Serial.println("askDarkISR TRIGGERED");
     detachInterrupt(digitalPinToInterrupt(button_input));
     state = 1;
   }
@@ -161,10 +192,9 @@ void askDarkISR(void){
 void captureDarkISR(void){
   t_now = millis();
   if ((t_now - t_last) > t_debounce_ms){
-    Serial.println("captureDarkISR TRIGGERED");
+//    Serial.println("captureDarkISR TRIGGERED");
     detachInterrupt(digitalPinToInterrupt(button_input));
     dark_counts = value;
-    Serial.println("Setting state to 2");
     state = 2;
   }
   t_last = t_now;
@@ -173,7 +203,7 @@ void captureDarkISR(void){
 void askMediaISR(void){
   t_now = millis();
   if ((t_now - t_last) > t_debounce_ms){
-    Serial.println("askMediaISR TRIGGERED");
+//    Serial.println("askMediaISR TRIGGERED");
     detachInterrupt(digitalPinToInterrupt(button_input));
     state = 2;
   }
@@ -183,11 +213,11 @@ void askMediaISR(void){
 void captureMediaISR(void){
   t_now = millis();
   if ((t_now - t_last) > t_debounce_ms){
-    Serial.println("captureMediaISR TRIGGERED");
+//    Serial.println("captureMediaISR TRIGGERED");
     detachInterrupt(digitalPinToInterrupt(button_input));
     ref_counts = value;
     lcd.clear();
-//    lcd.print("Measured OD:");
+    lcd.print("Measured OD:");
 //    attachInterrupt(digitalPinToInterrupt(button_input), multiISR, LOW);
     state = 3;
   }
@@ -200,7 +230,6 @@ void captureMediaISR(void){
 int debounce = 100;          // ms debounce period to prevent flickering when pressing or releasing the button
 int DCgap = 280;            // max ms between clicks for a double click event
 int holdTime = 1000;        // ms hold period: how long to wait for press+hold event
-int longHoldTime = 3000;
 
 // Button variables
 boolean buttonVal = HIGH;   // value read from button
@@ -213,7 +242,6 @@ long upTime = -1;           // time the button was released
 boolean ignoreUp = false;   // whether to ignore the button release because the click+hold was triggered
 boolean waitForUp = false;        // when held, whether to wait for the up event
 boolean holdEventPast = false;    // whether or not the hold event happened already
-boolean longHoldEventPast = false; //whether or not the long hold event happened already
 
 int checkButton() {   
    int event = 0;
