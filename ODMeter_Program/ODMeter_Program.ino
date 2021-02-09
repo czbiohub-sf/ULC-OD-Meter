@@ -20,7 +20,7 @@ volatile unsigned long t_last = 0;
 volatile int dark_counts = 0;
 volatile int ref_counts = 0;
 volatile bool ref_captured = false;
-int t_debounce_ms = 100;
+int t_debounce_ms = 200;
 volatile bool reset_to_raw = false;
 volatile int state = 0;
 volatile int stored_next_state = 0;
@@ -227,7 +227,7 @@ void captureMediaISR(void){
 //  MULTI-CLICK:  One Button, Multiple Events
 
 // Button timing variables
-int debounce = 100;          // ms debounce period to prevent flickering when pressing or releasing the button
+int debounce = 200;          // ms debounce period to prevent flickering when pressing or releasing the button
 int DCgap = 280;            // max ms between clicks for a double click event
 int holdTime = 1000;        // ms hold period: how long to wait for press+hold event
 
