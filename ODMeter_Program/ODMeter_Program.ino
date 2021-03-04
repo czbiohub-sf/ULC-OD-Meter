@@ -63,11 +63,8 @@ void loop() {
   switch (state) {
     case 0: // raw reading
        // average the readings once the sample count threshold is met
-      Serial.print("Sample counts: ");
-      Serial.println(sample_counts);
       if (sample_counts >= thresh_counts) {
         value = (sum_of_reads / thresh_counts);
-        Serial.println("In state 0 about to print number");
         printNumber(value);
         sample_counts = 0;
         sum_of_reads = 0;
