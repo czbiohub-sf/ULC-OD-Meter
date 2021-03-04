@@ -41,9 +41,9 @@ void setup() {
 
   //Set welcome screen
   lcd.begin(16, 2);
-  lcd.print("  CZ Biohub");
+  lcd.print("   CZ Biohub");
   lcd.setCursor(0,1);
-  lcd.print("Turbidity Meter");
+  lcd.print("    OD Meter");
   delay(2000);
 
   //Show raw intensity at startup
@@ -63,8 +63,11 @@ void loop() {
   switch (state) {
     case 0: // raw reading
        // average the readings once the sample count threshold is met
-      if (sample_counts == thresh_counts) {
+      Serial.print("Sample counts: ");
+      Serial.println(sample_counts);
+      if (sample_counts >= thresh_counts) {
         value = (sum_of_reads / thresh_counts);
+        Serial.println("In state 0 about to print number");
         printNumber(value);
         sample_counts = 0;
         sum_of_reads = 0;
@@ -169,12 +172,17 @@ void tempISR(void) {
   if ((t_now - t_last) > t_debounce_ms) {
 //    Serial.println("tempISR TRIGGERED");
     detachInterrupt(digitalPinToInterrupt(button_input));
-    if (stored_next_state == 1) {
-      attachInterrupt(digitalPinToInterrupt(button_input), captureDarkISR, LOW);
+    if (digitalRead(button_input) == LOW) {
+      attachInterrupt(digitalPinToInterrupt(button_input), tempISR, HIGH);
     } else {
-      // it equals 2
-      attachInterrupt(digitalPinToInterrupt(button_input), captureMediaISR, LOW);
+      if (stored_next_state == 1) {
+        attachInterrupt(digitalPinToInterrupt(button_input), captureDarkISR, LOW);
+      } else {
+        // it equals 2
+        attachInterrupt(digitalPinToInterrupt(button_input), captureMediaISR, LOW);
+      }     
     }
+ 
   }
 }
 
