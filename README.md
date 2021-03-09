@@ -23,4 +23,4 @@ In dark ref mode, raw intensities are displayed with the label 'Dark intensity'.
 In blank ref mode, raw intensities are displayed with the label 'Media intensity'. In this mode, place the blank reference (which can be media for bacteria, or clean water for water-based samples) in the cuvette holder, and press the button once to record the blank value. Collecting these dark and blank references are important in calibrating for the OD Readout mode.
 
 **OD Readout Mode**
-In OD readout mode, the measured OD is displayed on screen. If reference values need to be re-recorded, press down on the button until the prompt for inserting the dark reference is displayed on the screen.
+In OD readout mode, both the measured OD and the raw value are displayed on screen. If reference values need to be re-recorded, press down on the button until the prompt for inserting the dark reference is displayed on the screen.
