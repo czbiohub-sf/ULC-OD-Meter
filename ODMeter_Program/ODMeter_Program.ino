@@ -65,6 +65,7 @@ void loop() {
        // average the readings once the sample count threshold is met
       if (sample_counts >= thresh_counts) {
         value = (sum_of_reads / thresh_counts);
+        Serial.println("In state 0 about to print number");
         printNumber(value);
         sample_counts = 0;
         sum_of_reads = 0;
@@ -141,12 +142,17 @@ void loop() {
         
       }
       if (sample_counts == thresh_counts) {
-      value = (sum_of_reads / thresh_counts);
-//      lcd.clear();
-//      lcd.print(value);
-      printNumber(-1.0 * log10(float(value-dark_counts) / float(ref_counts-dark_counts))); // OD Meter reading
-      sample_counts = 0;
-      sum_of_reads = 0;
+        value = (sum_of_reads / thresh_counts);
+        float od = -1.0 * log10(float(value-dark_counts) / float(ref_counts-dark_counts));
+        // Print out OD
+        lcd.setCursor(1,1);
+        lcd.print(od,3);
+  
+        // Print out raw value
+        lcd.setCursor(12,1);
+        lcd.print(value);
+        sample_counts = 0;
+        sum_of_reads = 0;
       }
       
       break;
@@ -167,7 +173,6 @@ void printNumber(float number){
 void tempISR(void) {
   t_now = millis();
   if ((t_now - t_last) > t_debounce_ms) {
-//    Serial.println("tempISR TRIGGERED");
     detachInterrupt(digitalPinToInterrupt(button_input));
     if (digitalRead(button_input) == LOW) {
       attachInterrupt(digitalPinToInterrupt(button_input), tempISR, HIGH);
@@ -187,7 +192,6 @@ void tempISR(void) {
 void askDarkISR(void){
   t_now = millis();
   if ((t_now - t_last) > t_debounce_ms){
-//    Serial.println("askDarkISR TRIGGERED");
     detachInterrupt(digitalPinToInterrupt(button_input));
     state = 1;
   }
@@ -197,7 +201,6 @@ void askDarkISR(void){
 void captureDarkISR(void){
   t_now = millis();
   if ((t_now - t_last) > t_debounce_ms){
-//    Serial.println("captureDarkISR TRIGGERED");
     detachInterrupt(digitalPinToInterrupt(button_input));
     dark_counts = value;
     state = 2;
@@ -208,7 +211,6 @@ void captureDarkISR(void){
 void askMediaISR(void){
   t_now = millis();
   if ((t_now - t_last) > t_debounce_ms){
-//    Serial.println("askMediaISR TRIGGERED");
     detachInterrupt(digitalPinToInterrupt(button_input));
     state = 2;
   }
@@ -218,12 +220,13 @@ void askMediaISR(void){
 void captureMediaISR(void){
   t_now = millis();
   if ((t_now - t_last) > t_debounce_ms){
-//    Serial.println("captureMediaISR TRIGGERED");
     detachInterrupt(digitalPinToInterrupt(button_input));
     ref_counts = value;
     lcd.clear();
-    lcd.print("Measured OD:");
-//    attachInterrupt(digitalPinToInterrupt(button_input), multiISR, LOW);
+    lcd.setCursor(1,0);
+    lcd.print("OD:");
+    lcd.setCursor(11,0);
+    lcd.print("Raw:");
     state = 3;
   }
   t_last = t_now;
