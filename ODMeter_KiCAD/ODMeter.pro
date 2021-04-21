@@ -1,4 +1,4 @@
-update=Thursday, January 21, 2021 at 10:48:18 AM
+update=Tuesday, April 20, 2021 at 09:25:34 PM
 version=1
 last_client=eeschema
 [general]
@@ -34,7 +34,7 @@ LibDir=
 [schematic_editor]
 version=1
 PageLayoutDescrFile=
-PlotDirectoryName=../../../../../../../../../../../../Users/emily.huynh/Desktop/
+PlotDirectoryName=../
 SubpartIdSeparator=0
 SubpartFirstId=65
 NetFmtName=Pcbnew
