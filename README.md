@@ -14,7 +14,8 @@ The OD Meter has three different states, as seen below:
 
 ![OD State Machine](OD_StateMachine.png)
 
-
+**Raw Mode**
+The system initially starts up in raw mode, in which raw intensities are displayed. This mode can be used to gauge if the Arduino has warmed up. The raw intensities should stabilize as it warms up. Press the button once to move to dark ref mode.
 
 **Dark Ref Mode**
 In dark ref mode, raw intensities are displayed with the label 'Dark intensity'. In this mode, place the dark cuvette in the cuvette holder, and press the button once to record the dark value.
