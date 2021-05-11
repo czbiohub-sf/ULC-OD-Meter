@@ -9,7 +9,7 @@ The latest Arduino IDE can be downloaded [on Arduino's website](https://www.ardu
 *Important:* Please give the Arduino about 30 minutes to warm up before starting any measurements.
 
 ## Operating the OD Meter
-The OD Meter has three different states, as seen below:
+The OD Meter has four different states, as seen below:
 
 
 ![OD State Machine](OD_StateMachine.png)
