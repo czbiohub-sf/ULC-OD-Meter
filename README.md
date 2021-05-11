@@ -12,6 +12,7 @@ to 2.0.
 ## Getting Started
 
 The full construction, setup and operating instructions are in the file
+
 ![Guide](Low-Cost Optical Density Meter.pdf)
 
 ## Operating the OD Meter
