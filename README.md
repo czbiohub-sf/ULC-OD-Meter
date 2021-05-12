@@ -15,7 +15,11 @@ The full construction, setup and operating instructions are in the
 ![complete guide file](Low-Cost_Optical_Density_Meter.pdf)
 (file "Low-Cost_Optical_Density_Meter.pdf")
 
-This guide is also available on bioRxiv: 
+The STL files needed to 3D print the parts needed for the build are in the
+"3D Printed Parts" folder.
+
+This guide is also available on bioRxiv:
+
 
 ## Super-Quick Operating Instructions
 
