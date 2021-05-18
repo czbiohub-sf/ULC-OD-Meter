@@ -13,7 +13,8 @@ OD meter that costs only US$60, and can measure OD values from ~0.05 to 2.0.
 
 The full construction, setup and operating instructions are in the
 ![complete guide file](Low-Cost_Optical_Density_Meter.pdf)
-(file "Low-Cost_Optical_Density_Meter.pdf")
+(file "Low-Cost_Optical_Density_Meter.pdf") and at
+https://www.biorxiv.org/content/10.1101/2021.05.14.444207v1
 
 The STL files needed to 3D print the parts needed for the build are in the
 "3D Printed Parts" folder.
