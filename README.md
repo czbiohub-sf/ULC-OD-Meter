@@ -19,9 +19,6 @@ https://www.biorxiv.org/content/10.1101/2021.05.14.444207v1
 The STL files needed to 3D print the parts needed for the build are in the
 "3D Printed Parts" folder.
 
-This guide is also available on bioRxiv:
-
-
 ## Super-Quick Operating Instructions
 
 *Important:* Please let the OD meter warm up for about 20 minutes before
