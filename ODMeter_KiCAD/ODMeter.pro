@@ -1,6 +1,6 @@
-update=Tuesday, April 20, 2021 at 09:25:34 PM
+update=Wednesday, September 01, 2021 at 10:38:57 AM
 version=1
-last_client=eeschema
+last_client=kicad
 [general]
 version=1
 RootSch=
@@ -34,7 +34,7 @@ LibDir=
 [schematic_editor]
 version=1
 PageLayoutDescrFile=
-PlotDirectoryName=../
+PlotDirectoryName=/Users/emily.huynh/Desktop/Software/ULC-Turbidity-Meter/
 SubpartIdSeparator=0
 SubpartFirstId=65
 NetFmtName=Pcbnew

@@ -315,8 +315,6 @@ Wire Wire Line
 	6650 4750 7375 4750
 Wire Wire Line
 	7575 4325 7575 4600
-NoConn ~ 6425 4225
-NoConn ~ 6425 4325
 NoConn ~ 6425 4425
 Wire Wire Line
 	6675 3225 6425 3225
@@ -337,4 +335,6 @@ Wire Wire Line
 Connection ~ 7375 4750
 Wire Wire Line
 	7375 4750 7425 4750
+Wire Wire Line
+	6425 4225 6425 4325
 $EndSCHEMATC
