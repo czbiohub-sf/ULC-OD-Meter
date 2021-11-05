@@ -1,6 +1,6 @@
 cff-version: 1.2.0
-title: Firmware for portable low-cost optical density meter
-message: If you use this software, please cite both the article from preferred-citation and the software itself.
+title: "Firmware for portable low-cost optical density meter"
+message: "If you use this software, please cite both the article from references and the software itself from preferred citation.""
 type: software
 preferred-citation:
   authors:
@@ -21,43 +21,29 @@ preferred-citation:
       affiliation: Chan Zuckerberg Biohub
       email: rafael.gomez@czbiohub.org
       orcid: 'https://orcid.org/0000-0001-8017-9669'
-  title: Portable low-cost optical density meter
-  type: article
-  url: >-
-    https://www.biorxiv.org/content/10.1101/2021.05.14.444207v1
-  abstract: >-
-    Measuring optical density (OD) is a very common
-    technique in biological laboratories to determine
-    the concentration of a substance in solution or of
-    bacteria (or microscopic particles) in suspension.
-    For example, bacterial cultures engineered to
-    produce (express) a protein or compound of interest
-    are a workhorse of modern molecular biology
-    laboratories. Commonly, the expression of the
-    product is triggered (induced) by a chemical signal
-    added to the culture at the proper time in the
-    growth curve of the culture (typically in the
-    middle of the exponential growth phase, at an OD
-    value of ∼0.6). The most common tool for measuring
-    OD is a spectrophotometer. However, most
-    spectrophotometers are sophisticated, non-portable
-    and expensive laboratory instruments, costing tens
-    of thousands of dollars. Even a very low cost
-    spectrophotometer for educational use costs at
-    least US$1,000. Because of the cost, even well
-    resourced labs have only one instrument, which
-    becomes a bottleneck when multiple bacterial
-    cultures need to be monitored simultaneously. The
-    problem is more acute in developing countries,
-    where multiple labs have to share a single
-    spectrophotometer, or there’s no such instrument at
-    all. Having a cheap and simple device to measure OD
-    would enable multiple people in a laboratory to
-    monitor their bacterial cultures independently,
-    even in resource-limited settings. At the same
-    time, a portable OD meter could be useful for field
-    work. Here we present the detailed build
-    instructions and characterization of a very simple
-    OD meter that costs only US$60, and can measure OD
-    values from ∼0.05 to 2.0.
+  title: "Firmware for portable low-cost optical density meter"
+  type: software
+references:
+  - authors:
+    - given-names: Robert R.
+      family-names: Puccinelli
+      affiliation: Chan Zuckerberg Biohub
+    - given-names: Joana P.
+      family-names: Cabrera
+      affiliation: Chan Zuckerberg Biohub
+    - given-names: Emily
+      family-names: Huynh
+      affiliation: Chan Zuckerberg Biohub
+    - given-names: Paul M.
+      family-names: Lebel
+      affiliation: Chan Zuckerberg Biohub
+    - given-names: Rafael
+      family-names: Gómez-Sjöberg
+      affiliation: Chan Zuckerberg Biohub
+      email: rafael.gomez@czbiohub.org
+      orcid: 'https://orcid.org/0000-0001-8017-9669'
+    title: "Portable low-cost optical density meter"
+    type: article
+    url: https://www.biorxiv.org/content/10.1101/2021.05.14.444207v1
+    abstract: "Measuring optical density (OD) is a very common technique in biological laboratories to determine the concentration of a substance in solution or of bacteria (or microscopic particles) in suspension. For example, bacterial cultures engineered to produce (express) a protein or compound of interest are a workhorse of modern molecular biology laboratories. Commonly, the expression of the product is triggered (induced) by a chemical signal added to the culture at the proper time in the growth curve of the culture (typically in the middle of the exponential growth phase, at an OD value of ∼0.6). The most common tool for measuring OD is a spectrophotometer. However, most spectrophotometers are sophisticated, non-portable and expensive laboratory instruments, costing tens of thousands of dollars. Even a very low cost spectrophotometer for educational use costs at least US$1,000. Because of the cost, even well resourced labs have only one instrument, which becomes a bottleneck when multiple bacterial cultures need to be monitored simultaneously. The problem is more acute in developing countries, where multiple labs have to share a single spectrophotometer, or there's no such instrument at all. Having a cheap and simple device to measure OD would enable multiple people in a laboratory to monitor their bacterial cultures independently, even in resource-limited settings. At the same time, a portable OD meter could be useful for field work. Here we present the detailed build instructions and characterization of a very simple OD meter that costs only US$60, and can measure OD values from $\sim$0.05 to 2.0."
 date-released: '2021-05-17'
