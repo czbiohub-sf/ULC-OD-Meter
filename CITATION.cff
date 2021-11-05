@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 title: "Firmware for portable low-cost optical density meter"
-message: "If you use this software, please cite both the article from references and the software itself from preferred citation."
+message: "If you use this software, please cite both the article from references and the software itself from preferred citation.""
 type: software
 preferred-citation:
   authors:
@@ -25,23 +25,23 @@ preferred-citation:
   type: software
 references:
   - authors:
-    - given-names: Robert R.
-      family-names: Puccinelli
-      affiliation: Chan Zuckerberg Biohub
-    - given-names: Joana P.
-      family-names: Cabrera
-      affiliation: Chan Zuckerberg Biohub
-    - given-names: Emily
-      family-names: Huynh
-      affiliation: Chan Zuckerberg Biohub
-    - given-names: Paul M.
-      family-names: Lebel
-      affiliation: Chan Zuckerberg Biohub
-    - given-names: Rafael
-      family-names: Gómez-Sjöberg
-      affiliation: Chan Zuckerberg Biohub
-      email: rafael.gomez@czbiohub.org
-      orcid: 'https://orcid.org/0000-0001-8017-9669'
+      - given-names: Robert R.
+        family-names: Puccinelli
+        affiliation: Chan Zuckerberg Biohub
+      - given-names: Joana P.
+        family-names: Cabrera
+        affiliation: Chan Zuckerberg Biohub
+      - given-names: Emily
+        family-names: Huynh
+        affiliation: Chan Zuckerberg Biohub
+      - given-names: Paul M.
+        family-names: Lebel
+        affiliation: Chan Zuckerberg Biohub
+      - given-names: Rafael
+        family-names: Gómez-Sjöberg
+        affiliation: Chan Zuckerberg Biohub
+        email: rafael.gomez@czbiohub.org
+        orcid: 'https://orcid.org/0000-0001-8017-9669'
     title: "Portable low-cost optical density meter"
     type: article
     url: https://www.biorxiv.org/content/10.1101/2021.05.14.444207v1
